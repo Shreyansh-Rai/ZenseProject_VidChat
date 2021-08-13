@@ -63,7 +63,7 @@ function addstream(mystream, myvidfe) {
 const p = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "5000",
+    port: "443",
 });
 
 const uname = prompt("Enter your username")
