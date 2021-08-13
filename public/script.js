@@ -63,7 +63,7 @@ function addstream(mystream, myvidfe) {
 const p = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "443",
+    port: "5000", //443 for heroku
 });
 
 const uname = prompt("Enter your username")
