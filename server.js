@@ -69,7 +69,7 @@ io.on('connection',(socket)=>
         // console.log(socket.id)
         // console.log(peers[socket.id])
         //console.log(socket.id)
-        socket.broadcast.to(sockmap[socket.id]).emit('ul',users[socket.id],peers[socket.id])
+        //socket.broadcast.to(sockmap[socket.id]).emit('ul',users[socket.id],peers[socket.id])
         delete users[socket.id]
     })
 
