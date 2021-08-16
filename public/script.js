@@ -31,8 +31,11 @@ navigator.mediaDevices
     
     p.on('call', (call)=>
     {
+        //console.log(call.peer)
         call.answer(stream) //give peer your stream in exchange for his (he called)
         const pvid = document.createElement("video")
+        //pvid.classList.add(call.peer)
+        pvid.setAttribute('id',`${call.peer}`)
         call.on('stream',(stream)=>
         {
             addstream(stream,pvid) //When the stream event gets genereated
@@ -42,6 +45,7 @@ navigator.mediaDevices
 const sendstream2p = (pid,stream)=>
 {
     const pvidfe = document.createElement('video')
+    pvidfe.setAttribute('id',`${pid}`)
     //setting up the peer 
     const call = p.call(pid,stream) //call the guy and send him your feed
     call.on('stream', (stream)=>
@@ -63,7 +67,7 @@ function addstream(mystream, myvidfe) {
 const p = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "5000", //443 for heroku
+    port: "443",
 });
 
 const uname = prompt("Enter your username")
@@ -105,8 +109,12 @@ socket.on('incoming',(mes,uid)=>
     }
 })
 
-socket.on('ul',(un)=>
+socket.on('ul',(un,pidl)=>
 {
+
+    //console.log(pidl)
+    var vfe = document.getElementById(`${pidl}`)
+    vfe.remove()
     const newtext = document.createElement('div')
     newtext.innerText=`${un} has left`
     newtext.classList.add('message')
@@ -118,10 +126,11 @@ socket.on('ul',(un)=>
 
 const bye = ()=>
 {
-    socket.emit('userl',uname,roomuuid)
+    socket.emit('userl',uname,roomuuid,p.id)
+    //console.log(`${p.id}`)
     myvidfe.srcObject=null
     p.destroy()
-    window.close()
+    //window.close()
 }
 
 const micprops= ()=>
