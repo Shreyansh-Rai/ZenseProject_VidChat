@@ -54,9 +54,9 @@ io.on('connection',(socket)=>
         delete users[socid]
     })
 
-    socket.on('userl',(temp,roomuuid)=>
+    socket.on('userl',(temp,roomuuid,pidl)=>
     {
-        socket.broadcast.to(roomuuid).emit('ul',temp)
+        socket.broadcast.to(roomuuid).emit('ul',temp,pidl)
     })
 })
 
@@ -66,5 +66,5 @@ const users={}
 
 
 
-server.listen(5000)
-//server.listen(process.env.port||5000) for heroku
+
+server.listen(process.env.PORT||5000)
