@@ -1,10 +1,14 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 const socket = io("/");
 //attempt to get vid running
+
 const myvidfe = document.createElement("video"); //client sees this
 myvidfe.muted = true;
 const screen = document.getElementById("screen"); //this stuff is the grid
 let mystream
+let plist = []
+
+
 navigator.mediaDevices
 .getUserMedia({
     video: true,
@@ -42,6 +46,10 @@ navigator.mediaDevices
         })
     })
 }); //a get media gives a promise
+
+
+
+
 const sendstream2p = (pid,stream)=>
 {
     const pvidfe = document.createElement('video')
@@ -54,6 +62,10 @@ const sendstream2p = (pid,stream)=>
         addstream(stream,pvidfe)
     })
 }
+
+
+
+
 function addstream(mystream, myvidfe) {
     myvidfe.srcObject = mystream;
     myvidfe.addEventListener("loadedmetadata", () => {
@@ -67,11 +79,14 @@ function addstream(mystream, myvidfe) {
 const p = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "5000", //443 for heroku
+    port: "443", //443 for heroku
 });
+
+
 
 const uname = prompt("Enter your username")
 p.on("open", (id) => {
+    plist.push(id)
   socket.emit("newuserjoined", roomuuid, id,uname);
   //generate a new user joins event if peer js tells you
 });
@@ -113,6 +128,7 @@ socket.on('ul',(un,pidl)=>
 {
 
     //console.log(pidl)
+    
     var vfe = document.getElementById(`${pidl}`)
     vfe.remove()
     const newtext = document.createElement('div')
