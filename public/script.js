@@ -130,7 +130,7 @@ socket.on('ul',(un,pidl)=>
     //console.log(pidl)
     
     var vfe = document.getElementById(`${pidl}`)
-    vfe.remove()
+    //vfe.remove()
     const newtext = document.createElement('div')
     newtext.innerText=`${un} has left`
     newtext.classList.add('message')
