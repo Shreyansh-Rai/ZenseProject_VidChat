@@ -149,7 +149,7 @@ const bye = ()=>
     socket.emit('userl',uname,roomuuid,p.id)
     //console.log(`${p.id}`)
     myvidfe.srcObject=null
-    //p.destroy()
+    p.destroy()
     //window.close()
 }
 
