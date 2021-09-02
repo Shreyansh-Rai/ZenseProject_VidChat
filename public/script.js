@@ -61,6 +61,10 @@ const sendstream2p = (pid,stream)=>
         //We get his stream
         addstream(stream,pvidfe)
     })
+    call.on('close', ()=>
+    {
+        pvidfe.remove()
+    })
 }
 
 
@@ -79,7 +83,7 @@ function addstream(mystream, myvidfe) {
 const p = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "5000", //443 for heroku limited use very buggy on host
+    port: "443", //443 for heroku limited use very buggy on host
 });
 
 
@@ -145,7 +149,7 @@ const bye = ()=>
     socket.emit('userl',uname,roomuuid,p.id)
     //console.log(`${p.id}`)
     myvidfe.srcObject=null
-    p.destroy()
+    //p.destroy()
     //window.close()
 }
 
