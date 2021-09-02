@@ -83,7 +83,7 @@ function addstream(mystream, myvidfe) {
 const p = new Peer(undefined, {
     path: "/peerjs",
     host: "/",
-    port: "443", //443 for heroku limited use very buggy on host
+    port: "5000", //443 for heroku limited use very buggy on host
 });
 
 
